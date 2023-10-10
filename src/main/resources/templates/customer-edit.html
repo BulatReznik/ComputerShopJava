@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default}">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+  <div th:text="${errors}" class="margin-bottom alert-danger"></div>
+  <form action="#" th:action="@{/customer/{id}(id=${id})}" th:object="${customerDto}" method="post">
+
+    <div class="mb-3">
+      <label for="firstName" class="form-label">Имя покупателя</label>
+      <input type="text" class="form-control" id="firstName" th:field="${customerDto.firstName}" required="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Фамилия покупателя</label>
+      <input type="text" class="form-control" id="lastName" th:field="${customerDto.lastName}" required="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="login" class="form-label">Логин</label>
+      <input type="text" class="form-control" id="login" th:field="${customerDto.login}" required="true">
+    </div>
+    <!--
+    <div class="mb-3">
+      <label class="form-label">Заказы</label>
+      <ul>
+        <li th:each="orderr : ${orderrs}">
+          <div>
+            <input type="checkbox" th:field="*{orderrs}" th:value="${orderr.id}">
+            <label th:text="${orderr.orderrName}"></label>
+          </div>
+        </li>
+      </ul>
+    </div>-->
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Заказ</th>
+        <th scope="col">Дата заказа</th>
+        <th scope="col">Фамилия покупателя</th>
+        <th scope="col">Товары</th>
+        <th scope="col"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="orderr, iterator: ${orderrs}">
+        <th scope="row" th:text="${iterator.index} + 1"/>
+        <td th:text="${orderr.id}"/>
+        <td th:text="${orderr.orderrName}"/>
+        <td th:text="${orderr.orderrDate}" />
+        <td th:text="${orderr.customer.lastName}" />
+        <td th:text="${orderr.prettyConsignments()}" />
+        <td style="width: 10%">
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary button-fixed">
+        <span th:if="${id == null}">Добавить</span>
+        <span th:if="${id != null}">Обновить</span>
+      </button>
+      <a class="btn btn-secondary button-fixed" th:href="@{/customer}">
+        Назад
+      </a>
+    </div>
+  </form>
+</div>
+</body>
+</html>

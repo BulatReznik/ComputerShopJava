@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{default}">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+    <p th:text="${say}"/>
+    <form action="#" th:action="@{/speaker}" method="get">
+        <div class="mb-3">
+            <label for="name" class="form-label">Имя</label>
+            <input type="text" class="form-control" id="name" th:name="name" th:value="${name}" required="true">
+        </div>
+        <div class="mb-3">
+            <label for="lang" class="form-label">Язык</label>
+            <select id="lang" class="form-select" th:name="lang">
+                <option th:each="value: ${langs}" th:selected="${lang} == ${value}">
+                    <span th:text="${value}"></span>
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Отправить</button>
+    </form>
+</div>
+</body>
+</html>

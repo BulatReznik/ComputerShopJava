@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default}" xmlns:th="">
+<head>
+    <script type="text/javascript" src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Имя</th>
+            </tr>
+            </thead>
+            <tbody id="students">
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://localhost:8080/api/student/"
+            }).then(function (data) {
+                $.each(data, function (index, value) {
+                    const row = $("<tr>");
+                    const number = $("<th>")
+                        .attr("scope", "row")
+                        .text(index + 1);
+                    const id = $("<td>").text(value.id);
+                    const name = $("<td>").text(value.firstName + ' ' + value.lastName);
+                    row.append(number);
+                    row.append(id);
+                    row.append(name);
+                    $("#students").append(row);
+                });
+            });
+        });
+    </script>
+</th:block>
+</html>

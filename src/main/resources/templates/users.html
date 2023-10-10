@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default}">
+<body>
+<div class="container" layout:fragment="content">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ID</th>
+                <th scope="col">Логин</th>
+                <th scope="col">Роль</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user, iterator: ${users}">
+                <th scope="row" th:text="${iterator.index} + 1"></th>
+                <td th:text="${user.id}"></td>
+                <td th:text="${user.login}" style="width: 60%"></td>
+                <td th:text="${user.role}" style="width: 20%"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${totalPages > 0}" class="pagination">
+		<span style="float: left; padding: 5px 5px;">Страницы:</span>
+		<a th:each="page : ${pages}"
+			th:href="@{/users(page=${page}, size=${users.size})}"
+			th:text="${page}"
+			th:class="${page == users.number + 1} ? active">
+		</a>
+	</div>
+</div>
+</body>
+</html>

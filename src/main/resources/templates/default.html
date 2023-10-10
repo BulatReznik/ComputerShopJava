@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>ComputerShop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="icon" href="/favicon.svg">
+    <script type="text/javascript" src="/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/webjars/font-awesome/6.1.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <i class="fa-solid fa-font-awesome"></i>
+            ComputerShop
+        </a>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav" th:with="activeLink=${#request.requestURI}">
+                <a class="nav-link" href="/"
+                   th:classappend="${#strings.equals(activeLink, '/')} ? 'active' : ''">Главная</a>
+
+                <a class="nav-link" href="/customer"
+                   th:classappend="${#strings.equals(activeLink, '/customer')} ? 'active' : ''">Покупатель</a>
+
+                <a class="nav-link" href="/orderr"
+                   th:classappend="${#strings.equals(activeLink, '/orderr')} ? 'active' : ''">Заказ</a>
+
+                <a class="nav-link" href="/consignment"
+                   th:classappend="${#strings.equals(activeLink, '/consignment')} ? 'active' : ''">Товар</a>
+
+                <!--<a class="nav-link" href="/speaker"
+                   th:classappend="${#strings.equals(activeLink, '/speaker')} ? 'active' : ''">Пример Speaker</a>
+
+                <a class="nav-link" href="/test"
+                   th:classappend="${#strings.equals(activeLink, '/test')} ? 'active' : ''">Пример Test</a>
+
+                <a class="nav-link" href="/student"
+                   th:classappend="${#strings.equals(activeLink, '/student')} ? 'active' : ''">Пример Student</a>
+
+                <a class="nav-link" href="/rest-test"
+                   th:classappend="${#strings.equals(activeLink, '/rest-test')} ? 'active' : ''">Пример запроса к REST
+
+                    API</a>
+                <a class="nav-link" href="/swagger-ui/index.html" target="_blank">Документация REST API</a>
+                -->
+                <a class="nav-link" href="/h2-console/" target="_blank">Консоль H2</a>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="container container-padding" layout:fragment="content">
+    </div>
+</div>
+</body>
+<th:block layout:fragment="scripts">
+</th:block>
+</html>

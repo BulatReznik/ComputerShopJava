@@ -1,0 +1,23 @@
+.container-padding {
+    padding: 10px;
+}
+
+.margin-bottom {
+    margin-bottom: 10px;
+}
+
+.button-fixed {
+    min-width: 120px;
+}
+
+.button-sm {
+    padding: 1px;
+}
+
+li {
+list-style-type: none;
+}
+
+ul{
+padding:0
+}

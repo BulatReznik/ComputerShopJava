@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org  ">
+<head>
+</head>
+<body>
+<div layout:fragment="content">
+  <div th:text="${errors}" class="margin-bottom alert-danger"></div>
+  <form action="#" th:action="@{/orderr/{id}(id=${id})}" th:object="${orderrDto}" method="post">
+
+    <div class="mb-3">
+      <label for="orderrName" class="form-label">Название заказа</label>
+      <input type="text" class="form-control" id="orderrName" th:field="${orderrDto.orderrName}" required="true">
+    </div>
+
+    <div class="mb-3">
+      <label for="orderrDate" class="form-label">Дата заказа</label>
+      <input type="date" class="form-control" id="orderrDate" th:field="${orderrDto.orderrDate}" required="true">
+
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Покупатель</label>
+      <select th:field="${orderrDto.customer.id}" class="form-control" required="true">
+        <option
+                th:each="customer: ${customers}" th:text="${customer.lastName}" th:value="${customer.id}" >
+        </option>
+      </select>
+    </div>
+
+    <!--<div class="mb-3">
+      <label class="form-label">Девайсы</label>
+      <ul>
+        <li th:each="consignment : ${consignments}">
+          <div>
+            <input type="checkbox" th:field="*{consignments}" th:value="${consignment.id}">
+            <label th:text="${consignment.consignmentName}"></label>
+          </div>
+        </li>
+      </ul>
+    </div>-->
+
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary button-fixed">
+        <span th:if="${id == null}">Добавить</span>
+        <span th:if="${id != null}">Обновить</span>
+      </button>
+      <a class="btn btn-secondary button-fixed" th:href="@{/orderr}">
+        Назад
+      </a>
+    </div>
+  </form>
+</div>
+</body>
+</html>
